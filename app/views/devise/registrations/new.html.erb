@@ -1,0 +1,54 @@
+<main>
+ 
+  <% if @user.errors.any? %>
+   <div class = "text-danger h2">
+    <%= @user.errors.count %> errors prohibited this obj from being saved:
+  </div>
+    <li class = "text-danger ">
+    <% @user.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+  </li>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+        <h2>Sign up</h2>
+        <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+
+         <div class="field">
+          <label for="user_name">Name</label><br>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          </div>
+
+          <div class="field">
+            <label for="user_email">Email</label><br>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+          </div>
+
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </div>
+
+          <div class="actions">
+             <%= f.submit "Sign up", class:"bg-success text-white" %>
+          </div>
+
+          <%= link_to "Log in", new_user_session_path %>
+      </div>
+    </div>
+  </div>
+</main>
+
+<% end %>

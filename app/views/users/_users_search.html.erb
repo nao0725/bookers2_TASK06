@@ -1,0 +1,26 @@
+
+<main>
+<table>
+    <thead>
+        <tr>
+            <th>image</th>
+            <th>name</th>
+            <th>introduction</th>
+        </tr>
+    </thead>
+    <tbody id ="user">
+        <% users.each do |user| %>
+        <tr>
+            <td>
+            <%= attachment_image_tag user, :profile_image, fallback: "no_image.jpg", size:'40x50' %>
+            </td>
+            <td><%= link_to user_path(user) do %>
+                <%= user.name %>
+                <% end %>
+            </td>
+            <td><%= user.introduction %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+</main>
