@@ -44,14 +44,15 @@
             <td><%= book.body %></td>
 
           <!--いいね機能-->
-          <td>
-           <%= render "favorites/favorite" , book: book %>
-          </td>
-          <td>
-            <p>コメント数：<%= book.book_comments.count %></p>
-          </td>
-         <% end %>
-        </tr>
+            <td>
+             <div id="favorites_buttons_<%= @book.id %>">
+              <%= render "favorites/favorite" , book: book %>
+             </div>
+            </td>
+          
+            <td><p>コメント数：<%= book.book_comments.count %></p></td>
+          </tr>
+        <% end %>
         </tbody>
       </table>
       </div>

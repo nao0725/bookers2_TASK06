@@ -1,0 +1,2 @@
+$(".commentsArea").html("<%= j(render "comments/comment", book_detail: @book_detail, book_comment: @book_comment ) %>")
+$(".inputComment").val(''); <!--ここでコメントをリセット-->

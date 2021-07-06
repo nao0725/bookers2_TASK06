@@ -22,7 +22,9 @@
 
           <!--いいね機能-->
           <td>
-            <%= render "favorites/favorite" , book: @book_detail %>
+            <div id="favorites_buttons_<%= @book_detail.id %>">
+             <%= render "favorites/favorite" , book: @book_detail %>
+            </div>
           </td>
            <td>
              <% if @book_detail.user == current_user %>
@@ -41,33 +43,18 @@
 
           <!--コメント機能-->
           <tbody>
-        
-            <% @book_detail.book_comments.each do |book_comment|%>
-            <tr>
-             <td>
-              <%= attachment_image_tag book_comment.user, :profile_image,fallback: "no_image.jpg", size:'40x40' %><br>
-              <%= link_to book_comment.user.name, user_path(@book_detail.user.id) %>
-             </td>
-             <td>
-             <%= book_comment.comment %>
-             </td>
-             <td>
-             <% if book_comment.user == current_user %>
-                  <%= link_to "Destroy",  book_book_comment_path(book_comment.book,book_comment), method: :delete,class: "btn btn-sm btn-secondary bg-danger text-white" %>
-                <% end %>
+          <tr class = "commentsArea">
+            <%= render "comments/comment", book_detail: @book_detail, book_comment: @book_comment %>
+          </tr>
+          <tr class = "inputComment">
+            <td>
+              <%= form_with(model:[@book_detail, @book_comment], remote: true) do |f| %>
+                <div class="form-group">
+                  <%=f.text_area:comment,rows:"5" ,class:"form-control" %>
+                </div>
+                <%= f.submit "送信" %>
+              <% end %>
             </td>
-            </tr>
-            <% end %>
-          
-          <tr>
-          <td>
-            <%= form_with(model:[@book_detail, @book_comment], local: true) do |f| %>
-            <div class="form-group">
-              <%=f.text_area:comment,rows:"5" ,class:"form-control" %>
-            </div>
-              <%= f.submit "送信" %>
-            <% end %>
-          </td>
           </tr>
           </tbody>
         </tbody>
