@@ -43,11 +43,11 @@
 
           <!--コメント機能-->
           <tbody>
-          <tr class = "commentsArea">
-            <%= render "comments/comment", book_detail: @book_detail, book_comment: @book_comment %>
+          <tr class = "CommentsArea">
+             <%= render "book_comments/comment", book_detail: @book_detail, book_comment: @book_comment %>
           </tr>
-          <tr class = "inputComment">
-            <td>
+          <tr>
+            <td class = "InputComment">
               <%= form_with(model:[@book_detail, @book_comment], remote: true) do |f| %>
                 <div class="form-group">
                   <%=f.text_area:comment,rows:"5" ,class:"form-control" %>
